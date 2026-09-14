@@ -124,37 +124,27 @@ ul{list-style:none;}
 /* ============ HERO ============ */
 .hero{
   position:relative;
-  min-height:96vh;
+  min-height:90vh;
   display:flex;
-  align-items:flex-end;
-  overflow:hidden;
+  align-items:center;
   background:var(--ivory);
+  padding:140px 0 80px;
 }
-.hero-media{
-  position:absolute; inset:0; z-index:0;
-}
-.hero-media img{
-  width:100%; height:100%; object-fit:cover; object-position:62% 40%;
-}
-.hero-scrim{
-  position:absolute; inset:0; z-index:1;
-  background:
-    linear-gradient(90deg, rgba(251,247,243,0.97) 0%, rgba(251,247,243,0.8) 32%, rgba(251,247,243,0.06) 58%),
-    linear-gradient(0deg, rgba(251,247,243,0.4) 0%, rgba(251,247,243,0) 30%);
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.15fr 0.85fr;
+  gap:clamp(32px, 5vw, 64px);
+  align-items:center;
+  width:100%;
 }
 .hero-content{
-  position:relative; z-index:2;
-  width:100%;
-  padding:0 var(--edge) 110px;
-  max-width:var(--container);
-  margin:0 auto;
+  max-width:580px;
 }
-.hero-inner{max-width:560px;}
 .hero h1{
   font-family:var(--font-display);
   font-weight:400;
-  font-size:clamp(40px, 6.2vw, 74px);
-  line-height:1.06;
+  font-size:clamp(36px, 5vw, 62px);
+  line-height:1.1;
   letter-spacing:0;
   color:var(--plum);
 }
@@ -164,19 +154,39 @@ ul{list-style:none;}
   color:var(--rose-deep);
 }
 .hero-sub{
-  margin-top:24px;
+  margin-top:22px;
   font-size:16px;
   color:var(--plum-soft);
-  max-width:400px;
+  max-width:440px;
   line-height:1.75;
   font-weight:300;
 }
 .hero-actions{
-  margin-top:40px;
+  margin-top:36px;
   display:flex;
   align-items:center;
-  gap:32px;
+  gap:28px;
   flex-wrap:wrap;
+}
+.hero-banner-frame{
+  position:relative;
+  width:100%;
+  min-height:260px;
+  aspect-ratio:16 / 10;
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 16px 40px rgba(54, 42, 44, 0.12);
+  border:1px solid var(--line);
+  background:#141112;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hero-banner-frame img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
 .btn{
@@ -591,7 +601,7 @@ footer{
 .reveal{opacity:0; transform:translateY(20px); transition:opacity 0.9s cubic-bezier(.22,.68,0,1), transform 0.9s cubic-bezier(.22,.68,0,1);}
 .reveal.in{opacity:1; transform:translateY(0);}
 
-/* ============ MOBILE NAV ============ */
+/* ============ MOBILE NAV & RESPONSIVE ============ */
 @media (max-width:900px){
   .nav-links{
     position:fixed; inset:0; top:0;
@@ -615,17 +625,21 @@ footer{
     font-size:13px;
   }
   .nav-toggle{display:flex;}
-}
 
-@media (max-width:900px){
-  .about-grid, .booking-grid, .contact-grid{grid-template-columns:1fr;}
-  .hero{align-items:flex-end;}
-  .hero-content{padding-bottom:64px;}
-  .hero-scrim{
-    background:
-      linear-gradient(180deg, rgba(251,247,243,0.3) 0%, rgba(251,247,243,0.55) 46%, rgba(251,247,243,0.95) 78%, rgba(251,247,243,1) 100%);
+  .hero{
+    padding:110px 0 60px;
   }
-  .hero-media img{ object-position:22% 34%; }
+  .hero-grid{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+  .hero-banner-frame{
+    order:-1;
+    max-width:480px;
+    margin:0 auto;
+  }
+
+  .about-grid, .booking-grid, .contact-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -650,18 +664,23 @@ footer{
 
 <!-- ================= HERO ================= -->
 <header class="hero">
-  <div class="hero-media">
-    <img src="assets/hero_logo.jpg" alt="Sarah Redekop Studio">
-  </div>
-  <div class="hero-scrim"></div>
-  <div class="hero-content">
-    <div class="hero-inner">
-      <div class="eyebrow"><span class="mark"></span> Beleza que começa nos detalhes. Sobrancelhas, lábios e cílios.</div>
-      <h1>Harmonia e naturalidade <em>para o seu rosto</em> ✨</h1>
-      <div class="hero-actions">
-        <a href="#booking" class="btn btn-primary">Agende Seu Horário</a>
-        <a href="#portfolio" class="btn-line">Ver os Resultados</a>
+  <div class="wrap" style="width: 100%;">
+    <div class="hero-grid">
+
+      <div class="hero-content">
+        <div class="eyebrow"><span class="mark"></span> Beleza que começa nos detalhes. Sobrancelhas, lábios e cílios.</div>
+        <h1>Harmonia e naturalidade <em>para o seu rosto</em> ✨</h1>
+        <p class="hero-sub">Micropigmentação e estética avançada pensadas com precisão para realçar sua essência com delicadeza e durabilidade.</p>
+        <div class="hero-actions">
+          <a href="#booking" class="btn btn-primary">Agende Seu Horário</a>
+          <a href="#portfolio" class="btn-line">Ver os Resultados</a>
+        </div>
       </div>
+
+      <div class="hero-banner-frame">
+        <img src="assets/hero_logo.jpg" alt="Sarah Redekop Studio — Sobrancelhas, Lábios, Precisão">
+      </div>
+
     </div>
   </div>
 </header>
